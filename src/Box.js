@@ -6,8 +6,7 @@ export default class Box extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      display: '#####',
-      play: false
+      display: '#####'
     };
     this.handleClick = this.handleClick.bind(this);
   }
