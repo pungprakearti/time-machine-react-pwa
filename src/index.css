@@ -17,6 +17,10 @@ body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 code {
@@ -25,13 +29,14 @@ code {
 }
 
 .mobile-cont {
+  max-width: 500px;
   width: 100vw;
   height: 100vh;
+  padding: 20px;
+  padding-bottom: 60px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  padding-bottom: 60px;
-  box-sizing: border-box;
 }
