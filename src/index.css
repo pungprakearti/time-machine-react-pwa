@@ -40,3 +40,7 @@ code {
   justify-content: center;
   align-items: center;
 }
+
+.add-button {
+  visibility: hidden;
+}

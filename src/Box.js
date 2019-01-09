@@ -35,7 +35,7 @@ export default class Box extends Component {
   }
 
   checkCode(code) {
-    if (code === '12345') {
+    if (code === '42069') {
       this.setState({ display: '2019' });
       setTimeout(() => {
         this.setState({ display: '2018' });
