@@ -1,20 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
-@import url('https://fonts.googleapis.com/css?family=Amita');
 
 .Box-dialpad-cont {
-  /* padding-bottom: 20px;
-  padding-top: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius: 10px;
-  background-color: rgb(199, 166, 56);
-  border: 20px solid rgba(80, 80, 40, 0.75);
-  border-top-width: 5px;
-  border-top-color: rgba(80, 80, 40, 0.35);
-  border-bottom-color: rgb(80, 80, 40);
-  border-left-width: 10px;
-  border-right-width: 10px;
-  box-sizing: border-box; */
   padding-bottom: 20px;
   padding-top: 10px;
   padding-left: 20px;
@@ -29,8 +15,6 @@
   border-right-width: 10px;
   box-sizing: border-box;
   display: flex;
-  /* flex-direction: row; */
-  /* flex-wrap: wrap; */
   justify-content: space-around;
   align-items: center;
   width: 250px;
@@ -51,7 +35,6 @@
   align-items: center;
 }
 
-/* td { */
 .Box-dialpad-btn {
   width: 60px;
   height: 60px;
@@ -89,7 +72,7 @@
 }
 
 .Box-display {
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   width: 220px;
   height: 80px;
   box-sizing: border-box;

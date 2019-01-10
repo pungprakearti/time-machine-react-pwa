@@ -1,5 +1,5 @@
 html {
-  height: 100vh;
+  height: calc(100vh - 70px);
   width: 100vw;
   overflow: hidden;
 }
@@ -14,7 +14,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: black;
   color: white;
-  height: 100vh;
+  height: calc(100vh - 70px);
   width: 100vw;
   overflow: hidden;
   display: flex;
@@ -30,8 +30,8 @@ code {
 
 .mobile-cont {
   max-width: 500px;
+  height: calc(100vh - 70px);
   width: 100vw;
-  height: 100vh;
   padding: 20px;
   padding-bottom: 60px;
   box-sizing: border-box;
