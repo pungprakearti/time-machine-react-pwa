@@ -1,6 +1,6 @@
 {
-  "short_name": "Time-Machine",
-  "name": "TIME FREAKING MACHINE",
+  "short_name": "Time Machine",
+  "name": "Time Machine - PWA - React",
   "icons": [
     {
       "src": "tm-icon192.png",
@@ -16,5 +16,5 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#000000"
 }
