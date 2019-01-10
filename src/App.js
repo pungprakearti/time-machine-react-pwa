@@ -7,6 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         <TimeMachine />
+        <button class="add-button">Add to home screen</button>
       </div>
     );
   }
