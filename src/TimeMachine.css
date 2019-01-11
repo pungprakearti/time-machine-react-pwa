@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
 
-.Box-dialpad-cont {
+.TimeMachine-dialpad-cont {
   padding-bottom: 20px;
   padding-top: 10px;
   padding-left: 20px;
@@ -19,13 +19,14 @@
   align-items: center;
   width: 250px;
   height: 300px;
+  position: relative;
 }
 
-.Box-press {
+.TimeMachine-press {
   transform: translateY(3px) scaleY(0.97);
 }
 
-.Box-dialpad {
+.TimeMachine-dialpad {
   width: 220px;
   height: 250px;
   display: flex;
@@ -35,7 +36,7 @@
   align-items: center;
 }
 
-.Box-dialpad-btn {
+.TimeMachine-dialpad-btn {
   width: 60px;
   height: 60px;
   background-color: rgb(108, 32, 32);
@@ -54,11 +55,11 @@
   transition: all 0.01s linear;
 }
 
-#Box-dialpad-empty {
+#TimeMachine-dialpad-empty {
   visibility: hidden;
 }
 
-.Box-cont {
+.TimeMachine-cont {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -71,7 +72,7 @@
   box-shadow: 0 40px 0 rgb(80, 80, 40);
 }
 
-.Box-display {
+.TimeMachine-display {
   margin-bottom: 10px;
   width: 220px;
   height: 80px;
@@ -94,4 +95,41 @@
   text-shadow: 0 0 40px rgba(73, 180, 73, 0.9);
   border-bottom-color: rgb(146, 146, 76);
   user-select: none;
+}
+
+.TimeMachine-power-cont {
+  border: 10px solid rgb(51, 45, 29);
+  box-sizing: border-box;
+  border-radius: 55px;
+  width: 55px;
+  height: 55px;
+  position: absolute;
+  left: 25px;
+  bottom: 17px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-top-width: 2px;
+  border-left-width: 5px;
+  border-right-width: 5px;
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.TimeMachine-power {
+  background-color: rgb(158, 125, 125);
+  box-sizing: border-box;
+  border-radius: 47px;
+  width: 45px;
+  height: 40px;
+  box-shadow: 0 5px 0 rgb(104, 82, 82);
+  transform: translateY(-5px);
+  transition: all 0.1s linear;
+}
+
+.power-on {
+  background-color: rgb(255, 45, 45);
+  box-shadow: 0 5px 0 rgb(182, 47, 47);
+  transform: translateY(0px);
 }
