@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './TimeMachine.css';
 import tmSound from './time-machine.mp3';
 import clickSound from './click.wav';
+import puSound from './power-up.wav';
+import errorSound from './error.mp3';
 import ghIcon from './github_icon.svg';
 
 export default class TimeMachine extends Component {
@@ -15,6 +17,8 @@ export default class TimeMachine extends Component {
     this.handlePower = this.handlePower.bind(this);
     this.audioClick = new Audio(clickSound);
     this.audioTT = new Audio(tmSound);
+    this.audioPower = new Audio(puSound);
+    this.audioError = new Audio(errorSound);
   }
 
   handleClick(evt) {
@@ -22,11 +26,15 @@ export default class TimeMachine extends Component {
     //get dialpad number
     let num = evt.target.textContent;
 
+    //set button to pressed style
     let btn = evt.target;
     evt.target.className = 'TimeMachine-dialpad-btn TimeMachine-press';
 
+    //reset audio click sound incase button clicks are fast
+    this.audioClick.currentTime = this.audioClick.duration;
     this.audioClick.play();
 
+    //after 100ms depress button
     setTimeout(() => {
       btn.className = 'TimeMachine-dialpad-btn';
     }, 100);
@@ -61,11 +69,24 @@ export default class TimeMachine extends Component {
   //turns on the time machine
   handlePower() {
     this.audioClick.play();
-    this.state.power
-      ? this.setState({ power: false })
-      : this.setState({ power: true });
-    //reset input if power on or off
-    this.setState({ display: '#####' });
+
+    //turn off
+    if (this.state.power) {
+      this.setState({ power: false });
+      this.setState({ display: '#####' });
+      this.audioTT.muted = true;
+      this.audioPower.muted = true;
+      document.body.className = '';
+
+      //turn on
+    } else {
+      this.setState({ power: true });
+      this.audioTT.currentTime = this.audioTT.duration;
+      this.audioTT.muted = false;
+      this.audioPower.currentTime = this.audioPower.duration;
+      this.audioPower.muted = false;
+      this.audioPower.play();
+    }
   }
 
   //check code and if is correct, time travel
@@ -106,13 +127,21 @@ export default class TimeMachine extends Component {
           }, 300);
         }, 500);
       }, 800);
+      // if (code === '42069') {
+      //   this.setState({ display: 'TRAVL' });
+      //   this.countDown();
     } else {
+      this.audioError.play();
       this.setState({ display: 'ERROR' });
       setTimeout(() => {
         this.setState({ display: '#####' });
       }, 750);
     }
   }
+
+  // countDown() {
+
+  // }
 
   //travel through time!
   timeTravel() {
@@ -127,9 +156,9 @@ export default class TimeMachine extends Component {
     //
     //create dialpad
     let dialpad = [];
-    let dialNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, '', 0, ''];
+    let dialNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, -1, 0, -2];
     for (let btn of dialNums) {
-      if (btn === '') {
+      if (btn < 0) {
         dialpad.push(
           <div id="TimeMachine-dialpad-empty" key={btn}>
             {btn}
