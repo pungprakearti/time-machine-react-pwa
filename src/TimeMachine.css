@@ -60,6 +60,7 @@
 }
 
 .TimeMachine-cont {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -70,6 +71,41 @@
   width: 280px;
   border-radius: 10px;
   box-shadow: 0 40px 0 rgb(80, 80, 40);
+}
+
+.TimeMachine-rivet1,
+.TimeMachine-rivet2,
+.TimeMachine-rivet3,
+.TimeMachine-rivet4 {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 0 solid rgba(0, 0, 0, 0.5);
+  border-top-width: 2px;
+  border-top-color: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+.TimeMachine-rivet1 {
+  top: 5px;
+  left: 5px;
+}
+
+.TimeMachine-rivet2 {
+  top: 5px;
+  right: 5px;
+}
+
+.TimeMachine-rivet3 {
+  bottom: 5px;
+  left: 5px;
+}
+
+.TimeMachine-rivet4 {
+  bottom: 5px;
+  right: 5px;
 }
 
 .TimeMachine-display {
@@ -89,12 +125,65 @@
   font-size: 30px;
   letter-spacing: 10px;
   font-family: 'Press Start 2P', cursive;
-  text-indent: 10px;
+  text-indent: 14px;
   background-color: rgb(29, 51, 29);
   color: rgb(105, 206, 105);
   text-shadow: 0 0 40px rgba(73, 180, 73, 0.9);
   border-bottom-color: rgb(146, 146, 76);
   user-select: none;
+}
+
+.display-on {
+  border-top-color: rgb(41, 75, 41);
+  border-bottom-color: rgb(108, 141, 108);
+  border-right-color: rgb(87, 122, 87);
+  border-left-color: rgb(87, 122, 87);
+  background-color: rgb(38, 67, 38);
+  animation: flicker infinite 4s linear;
+  transition: all 1s linear;
+}
+
+@keyframes flicker {
+  4% {
+    border-top-color: rgb(41, 75, 41);
+    border-bottom-color: rgb(108, 141, 108);
+    border-right-color: rgb(87, 122, 87);
+    border-left-color: rgb(87, 122, 87);
+    background-color: rgb(38, 67, 38);
+    color: rgb(105, 206, 105);
+  }
+  5% {
+    border-top-color: rgba(0, 0, 0, 0.15);
+    border-bottom-color: rgb(146, 146, 76);
+    border-right-color: rgb(80, 80, 40);
+    border-left-color: rgb(80, 80, 40);
+    background-color: rgb(29, 51, 29);
+    color: rgb(49, 94, 49);
+  }
+  6% {
+    border-top-color: rgb(41, 75, 41);
+    border-bottom-color: rgb(108, 141, 108);
+    border-right-color: rgb(87, 122, 87);
+    border-left-color: rgb(87, 122, 87);
+    background-color: rgb(38, 67, 38);
+    color: rgb(105, 206, 105);
+  }
+  7% {
+    border-top-color: rgba(0, 0, 0, 0.15);
+    border-bottom-color: rgb(146, 146, 76);
+    border-right-color: rgb(80, 80, 40);
+    border-left-color: rgb(80, 80, 40);
+    background-color: rgb(29, 51, 29);
+    color: rgb(49, 94, 49);
+  }
+  10% {
+    border-top-color: rgb(41, 75, 41);
+    border-bottom-color: rgb(108, 141, 108);
+    border-right-color: rgb(87, 122, 87);
+    border-left-color: rgb(87, 122, 87);
+    background-color: rgb(38, 67, 38);
+    color: rgb(105, 206, 105);
+  }
 }
 
 .TimeMachine-power-cont {
@@ -132,4 +221,16 @@
   background-color: rgb(255, 45, 45);
   box-shadow: 0 5px 0 rgb(182, 47, 47);
   transform: translateY(0px);
+}
+
+.TimeMachine-github {
+  position: absolute;
+  right: 28px;
+  bottom: 18px;
+}
+
+#github-icon {
+  width: 52px;
+  height: auto;
+  opacity: 0.25;
 }

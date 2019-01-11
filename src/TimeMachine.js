@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './TimeMachine.css';
 import tmSound from './time-machine.mp3';
 import clickSound from './click.wav';
+import ghIcon from './github_icon.svg';
 
 export default class TimeMachine extends Component {
   constructor(props) {
@@ -150,10 +151,23 @@ export default class TimeMachine extends Component {
 
     return (
       <div className="TimeMachine-cont">
-        <div className="TimeMachine-display">
-          {this.state.power ? this.state.display : ''}
-        </div>
+        <div className="TimeMachine-rivet1" />
+        <div className="TimeMachine-rivet2" />
+        <div className="TimeMachine-rivet3" />
+        <div className="TimeMachine-rivet4" />
+        {this.state.power ? (
+          <div className="TimeMachine-display display-on">
+            {this.state.power ? this.state.display : ''}
+          </div>
+        ) : (
+          <div className="TimeMachine-display" />
+        )}
+
         <div className="TimeMachine-dialpad-cont">
+          <div className="TimeMachine-rivet1" />
+          <div className="TimeMachine-rivet2" />
+          <div className="TimeMachine-rivet3" />
+          <div className="TimeMachine-rivet4" />
           <div className="TimeMachine-dialpad">{dialpad}</div>
           <div className="TimeMachine-power-cont">
             {this.state.power ? (
@@ -164,6 +178,11 @@ export default class TimeMachine extends Component {
             ) : (
               <div className="TimeMachine-power" onClick={this.handlePower} />
             )}
+          </div>
+          <div className="TimeMachine-github">
+            <a href="https://github.com/pungprakearti/time-machine-react-pwa">
+              <img id="github-icon" src={ghIcon} alt="github icon" />
+            </a>
           </div>
         </div>
       </div>

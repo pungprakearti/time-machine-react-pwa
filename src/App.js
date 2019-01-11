@@ -9,7 +9,6 @@ class App extends Component {
         <div className="mobile-cont">
           <TimeMachine />
         </div>
-        <button class="add-button">Add to home screen</button>
       </div>
     );
   }
