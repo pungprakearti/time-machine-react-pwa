@@ -22,7 +22,6 @@ export default class TimeMachine extends Component {
   }
 
   handleClick(evt) {
-    //
     //get dialpad number
     let num = evt.target.textContent;
 
@@ -168,6 +167,7 @@ export default class TimeMachine extends Component {
         dialpad.push(
           <div
             className="TimeMachine-dialpad-btn"
+            id={`TimeMachine-btn-${btn}`}
             key={btn}
             onClick={this.handleClick}
             style={{ zIndex: btn > 0 ? btn : 10 }}

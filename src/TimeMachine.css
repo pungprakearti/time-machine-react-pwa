@@ -55,6 +55,11 @@
   transition: all 0.01s linear;
 }
 
+#TimeMachine-btn-0 {
+  /* nudge 0 key a bit to the right for center */
+  margin-left: 4px;
+}
+
 #TimeMachine-dialpad-empty {
   visibility: hidden;
 }
