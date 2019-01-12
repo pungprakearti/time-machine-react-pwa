@@ -14,3 +14,10 @@ You can try out the Time Machine here:
 https://dreamy-panini-e7b6c2.netlify.com/
 
 The time machine was built in react and all graphics are created using divs and css styling. The only image I used was the github logo.
+
+## Travel through time
+Turn on the time machine and try this code: 10101.
+
+This is a progressive web app, so try it on your phone! It works especially well on Android devices when saved to your home screen.
+
+### BEWARE! Time travel causes a physical side effect. You've been warned.
