@@ -128,19 +128,47 @@ export default class TimeMachine extends Component {
       }, 800);
       // if (code === '42069') {
       //   this.setState({ display: 'TRAVL' });
-      //   this.countDown();
-    } else {
-      this.audioError.play();
-      this.setState({ display: 'ERROR' });
-      setTimeout(() => {
-        this.setState({ display: '#####' });
-      }, 750);
+      //   setTimeout(() => {
+      //     this.countDown(2011);
+      //     console.log('setting count down to 2011');
+      //   }, 500);
+      //   //
+      //   //wrong code
+      // } else {
+      //   this.audioError.play();
+      //   this.setState({ display: 'ERROR' });
+      //   setTimeout(() => {
+      //     this.setState({ display: '#####' });
+      //   }, 750);
     }
   }
 
-  // countDown() {
+  countDown(endYear) {
+    let currentYear = new Date().getFullYear();
+    let count = 0;
+    let interval;
 
-  // }
+    setTimeout(() => {
+      this.setState({ display: currentYear });
+      randomYear();
+    }, 800);
+
+    if (count === 6) {
+      clearInterval(interval);
+      this.setState({ display: endYear });
+      this.timeTravel();
+    }
+
+    function randomYear() {
+      interval = setInterval(() => {
+        this.setState({ display: 'RANDY' });
+        count++;
+        console.log(count);
+      }, 200);
+    }
+  }
+
+  randomYear() {}
 
   //travel through time!
   timeTravel() {
@@ -159,7 +187,10 @@ export default class TimeMachine extends Component {
     for (let btn of dialNums) {
       if (btn < 0) {
         dialpad.push(
-          <div id="TimeMachine-dialpad-empty" key={btn}>
+          <div
+            className="TimeMachine-dialpad-btn TimeMachine-dialpad-empty"
+            key={btn}
+          >
             {btn}
           </div>
         );
