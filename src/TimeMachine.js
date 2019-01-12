@@ -90,7 +90,7 @@ export default class TimeMachine extends Component {
 
   //check code and if is correct, time travel
   checkCode(code) {
-    if (code === '42069') {
+    if (code === '10101') {
       this.setState({ display: '2019' });
       setTimeout(() => {
         this.setState({ display: '2018' });
