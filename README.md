@@ -1,5 +1,9 @@
 # Time Machine
 
+<p align="center">
+<img src="time_machine_preview.png" alt="A retro styled yellow box with red numeric buttons and green display" width="200px"/>
+</p>
+
 This is a time machine that I created for a lightning talk I did on progressive web apps. The slides for that talk can be found here:
 
 https://docs.google.com/presentation/d/1EhBWG6AW7zsSC96Yyu72RzDEizw-wMHD18Tg-J-b20c/edit?usp=sharing
