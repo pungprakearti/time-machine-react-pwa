@@ -133,13 +133,13 @@ export default class TimeMachine extends Component {
       //     console.log('setting count down to 2011');
       //   }, 500);
       //   //
-      //   //wrong code
-      // } else {
-      //   this.audioError.play();
-      //   this.setState({ display: 'ERROR' });
-      //   setTimeout(() => {
-      //     this.setState({ display: '#####' });
-      //   }, 750);
+      //wrong code
+    } else {
+      this.audioError.play();
+      this.setState({ display: 'ERROR' });
+      setTimeout(() => {
+        this.setState({ display: '#####' });
+      }, 750);
     }
   }
 
