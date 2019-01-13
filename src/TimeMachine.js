@@ -52,8 +52,8 @@ export default class TimeMachine extends Component {
           //on last number, check code
           if (i === 4) {
             this.setState(st => {
-              st.display = str;
-              this.checkCode(st.display);
+              this.checkCode(str);
+              return { display: str };
             });
 
             //if not last number, add to state and update display
@@ -90,85 +90,42 @@ export default class TimeMachine extends Component {
 
   //check code and if is correct, time travel
   checkCode(code) {
-    if (code === '10101') {
-      this.setState({ display: '2019' });
-      setTimeout(() => {
-        this.setState({ display: '2018' });
+    setTimeout(() => {
+      if (code === '10101') {
+        this.setState({ display: 'TRAVL' });
         setTimeout(() => {
-          this.setState({ display: '2017' });
-          setTimeout(() => {
-            this.setState({ display: '2016' });
-            setTimeout(() => {
-              this.setState({ display: '2015' });
-              setTimeout(() => {
-                this.setState({ display: '2014' });
-                setTimeout(() => {
-                  this.setState({ display: '2013' });
-                  setTimeout(() => {
-                    this.setState({ display: '2012' });
-                    setTimeout(() => {
-                      this.setState({ display: '2011' });
-                      this.timeTravel();
-                      setTimeout(() => {
-                        this.setState({ display: 'YEAH' });
-                        setTimeout(() => {
-                          this.setState({ display: 'FUN' });
-                          setTimeout(() => {
-                            this.setState({ display: '#####' });
-                          }, 4000);
-                        }, 2800);
-                      }, 20000);
-                    }, 10);
-                  }, 30);
-                }, 70);
-              }, 120);
-            }, 200);
-          }, 300);
+          this.countDown(2011);
         }, 500);
-      }, 800);
-      // if (code === '42069') {
-      //   this.setState({ display: 'TRAVL' });
-      //   setTimeout(() => {
-      //     this.countDown(2011);
-      //     console.log('setting count down to 2011');
-      //   }, 500);
-      //   //
-      //wrong code
-    } else {
-      this.audioError.play();
-      this.setState({ display: 'ERROR' });
-      setTimeout(() => {
-        this.setState({ display: '#####' });
-      }, 750);
-    }
+        //
+        // wrong code
+      } else {
+        this.audioError.play();
+        this.setState({ display: 'ERROR' });
+        setTimeout(() => {
+          this.setState({ display: '#####' });
+        }, 750);
+      }
+    }, 500);
   }
 
   countDown(endYear) {
     let currentYear = new Date().getFullYear();
     let count = 0;
-    let interval;
-
-    setTimeout(() => {
-      this.setState({ display: currentYear });
-      randomYear();
-    }, 800);
-
-    if (count === 6) {
-      clearInterval(interval);
-      this.setState({ display: endYear });
-      this.timeTravel();
-    }
-
-    function randomYear() {
-      interval = setInterval(() => {
-        this.setState({ display: 'RANDY' });
-        count++;
-        console.log(count);
-      }, 200);
-    }
+    let interval = setInterval(() => {
+      if (count === 0) this.setState({ display: currentYear });
+      if (count > 5) {
+        this.setState({
+          display: Math.floor(Math.random() * (currentYear - endYear)) + endYear
+        });
+      }
+      if (count === 20) {
+        clearInterval(interval);
+        this.setState({ display: endYear });
+        this.timeTravel();
+      }
+      count++;
+    }, 100);
   }
-
-  randomYear() {}
 
   //travel through time!
   timeTravel() {
@@ -176,6 +133,7 @@ export default class TimeMachine extends Component {
     document.body.className = 'flash';
     setTimeout(() => {
       document.body.className = '';
+      this.setState({ display: '#####' });
     }, 27000);
   }
 
@@ -209,12 +167,21 @@ export default class TimeMachine extends Component {
       }
     }
 
-    return (
-      <div className="TimeMachine-cont">
+    //rivets for panels
+    let rivets = (
+      <React.Fragment>
         <div className="TimeMachine-rivet1" />
         <div className="TimeMachine-rivet2" />
         <div className="TimeMachine-rivet3" />
         <div className="TimeMachine-rivet4" />
+      </React.Fragment>
+    );
+
+    return (
+      <div className="TimeMachine-cont">
+        {rivets}
+
+        {/* show display if power on */}
         {this.state.power ? (
           <div className="TimeMachine-display display-on">
             {this.state.power ? this.state.display : ''}
@@ -224,10 +191,7 @@ export default class TimeMachine extends Component {
         )}
 
         <div className="TimeMachine-dialpad-cont">
-          <div className="TimeMachine-rivet1" />
-          <div className="TimeMachine-rivet2" />
-          <div className="TimeMachine-rivet3" />
-          <div className="TimeMachine-rivet4" />
+          {rivets}
           <div className="TimeMachine-dialpad">{dialpad}</div>
           <div className="TimeMachine-power-cont">
             {this.state.power ? (
