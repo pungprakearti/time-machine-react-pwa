@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './TimeMachine.css';
-import tmSound from './time-machine.mp3';
-import clickSound from './click.wav';
-import puSound from './power-up.wav';
-import errorSound from './error.mp3';
-import ghIcon from './github_icon.svg';
+import tmSound2011 from './sounds/timeMachine2011.mp3';
+import clickSound from './sounds/click.wav';
+import puSound from './sounds/powerUp.wav';
+import errorSound from './sounds/error.mp3';
+import ghIcon from './githubIcon.svg';
 
 export default class TimeMachine extends Component {
   constructor(props) {
@@ -15,8 +15,14 @@ export default class TimeMachine extends Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.handlePower = this.handlePower.bind(this);
+
+    //timeout and interval ID's
+    this.displayTimeout = null;
+    this.displayInterval = null;
+
+    //audio
     this.audioClick = new Audio(clickSound);
-    this.audioTT = new Audio(tmSound);
+    this.audioTT = new Audio(tmSound2011);
     this.audioPower = new Audio(puSound);
     this.audioError = new Audio(errorSound);
   }
@@ -77,6 +83,14 @@ export default class TimeMachine extends Component {
       this.audioPower.muted = true;
       document.body.className = '';
 
+      //clear timeout used to control the display during time travel
+      if (this.displayTimeout) {
+        clearTimeout(this.displayTimeout);
+        clearInterval(this.displayInterval);
+        this.displayTimeout = null;
+        this.displayInterval = null;
+      }
+
       //turn on
     } else {
       this.setState({ power: true });
@@ -91,6 +105,8 @@ export default class TimeMachine extends Component {
   //check code and if is correct, time travel
   checkCode(code) {
     setTimeout(() => {
+      //
+      //other years and codes can be entered here
       if (code === '10101') {
         this.setState({ display: 'TRAVL' });
         setTimeout(() => {
@@ -108,33 +124,75 @@ export default class TimeMachine extends Component {
     }, 500);
   }
 
+  //display countdown effect on display
   countDown(endYear) {
     let currentYear = new Date().getFullYear();
     let count = 0;
+
+    //display year effect
     let interval = setInterval(() => {
+      //
+      //start with current year
       if (count === 0) this.setState({ display: currentYear });
+
+      //display random year between current year and end year
       if (count > 5) {
         this.setState({
           display: Math.floor(Math.random() * (currentYear - endYear)) + endYear
         });
       }
+
+      //display end year
       if (count === 20) {
         clearInterval(interval);
         this.setState({ display: endYear });
-        this.timeTravel();
+        this.timeTravel(endYear);
       }
+
       count++;
     }, 100);
   }
 
   //travel through time!
-  timeTravel() {
+  timeTravel(endYear) {
+    let count = 0;
+    let timeoutDuration = 0;
+
+    //more years can be added here. Need new sound, duration of sound,
+    //and interval for display effects.
+    if (endYear === 2011) {
+      //
+      //set time travel sound and duration
+      this.audioTT = new Audio(tmSound2011);
+      timeoutDuration = 27000;
+
+      //display text effects
+      this.displayInterval = setInterval(() => {
+        if (count === 10) this.setState({ display: 'FRDAY' });
+        if (count === 75) this.setState({ display: 'WKEND' });
+        if (count === 95) this.setState({ display: 'FRDAY' });
+        if (count === 170) this.setState({ display: 'WKEND' });
+        if (count === 180) this.setState({ display: 'PARTY' });
+        if (count === 198) this.setState({ display: 'YEAH!' });
+        if (count === 225) this.setState({ display: 'FUN!!' });
+        count++;
+      }, 100);
+    }
+
+    //play time travel sound
     this.audioTT.play();
+
+    //activate time travel effects
     document.body.className = 'flash';
-    setTimeout(() => {
+
+    //after sound, reset display and effects
+    this.displayTimeout = setTimeout(() => {
       document.body.className = '';
       this.setState({ display: '#####' });
-    }, 27000);
+
+      //kill timeout for display count
+      if (this.displayInterval) clearTimeout(this.displayInterval);
+    }, timeoutDuration);
   }
 
   render() {
@@ -143,6 +201,9 @@ export default class TimeMachine extends Component {
     let dialpad = [];
     let dialNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, -1, 0, -2];
     for (let btn of dialNums) {
+      //
+      //using flex box to center buttons and keep them aligned so,
+      //empty buttons are created and made invisible to center 0 button.
       if (btn < 0) {
         dialpad.push(
           <div
@@ -152,6 +213,8 @@ export default class TimeMachine extends Component {
             {btn}
           </div>
         );
+
+        //all other buttons
       } else {
         dialpad.push(
           <div
