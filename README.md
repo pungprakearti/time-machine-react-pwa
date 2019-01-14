@@ -20,5 +20,5 @@ This is a progressive web app, so try it on your phone! It works especially well
 
 ### BEWARE! Time travel causes a physical side effect. You've been warned.
 
-#### Future functionality
-I would like to implement key presses for the buttons when I have more time and add more time travel years.
+## Future functionality
+I would like to implement keyboard key presses for the buttons when I have more time and add more time travel years.
