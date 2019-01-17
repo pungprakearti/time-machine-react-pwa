@@ -8,8 +8,6 @@ This is a time machine that I created for a lightning talk I did on progressive 
 
 https://docs.google.com/presentation/d/1EhBWG6AW7zsSC96Yyu72RzDEizw-wMHD18Tg-J-b20c/edit?usp=sharing
 
-I'm still refactoring some things such as how the time travel year is displayed and animated. I am going to change it so it is a lot less hardcoded to allow for more dates to be entered into the time machine.
-
 You can try out the Time Machine here:
 https://dreamy-panini-e7b6c2.netlify.com/
 
@@ -21,3 +19,6 @@ Turn on the time machine and try this code: 10101.
 This is a progressive web app, so try it on your phone! It works especially well on Android devices when saved to your home screen.
 
 ### BEWARE! Time travel causes a physical side effect. You've been warned.
+
+## Future functionality
+I would like to implement keyboard key presses for the buttons when I have more time and add more time travel years.
