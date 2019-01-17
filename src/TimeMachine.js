@@ -77,8 +77,7 @@ export default class TimeMachine extends Component {
 
     //turn off
     if (this.state.power) {
-      this.setState({ power: false });
-      this.setState({ display: '#####' });
+      this.setState({ power: false, display: '#####' });
       this.audioTT.muted = true;
       this.audioPower.muted = true;
       document.body.className = '';
