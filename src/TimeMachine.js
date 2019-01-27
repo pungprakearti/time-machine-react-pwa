@@ -25,7 +25,9 @@ export default class TimeMachine extends Component {
             180: 'PARTY',
             198: 'YEAH',
             225: 'FUN'
-          }
+          },
+          sound: tmSound2011,
+          duration: 27000
         }
       }
     };
@@ -127,10 +129,26 @@ export default class TimeMachine extends Component {
     setTimeout(() => {
       //
       //other years and codes can be entered here
-      if (code === '10101') {
+      // if (code === '10101') {
+      //   this.setState({ display: 'TRAVL' });
+      //   setTimeout(() => {
+      //     this.countDown(2011);
+      //   }, 500);
+      //   //
+      //   // wrong code
+      // } else {
+      //   this.audioError.play();
+      //   this.setState({ display: 'ERROR' });
+      //   setTimeout(() => {
+      //     this.setState({ display: '#####' });
+      //   }, 750);
+      // }
+
+      // if (code === '10101') {
+      if (this.state.travelData[code]) {
         this.setState({ display: 'TRAVL' });
         setTimeout(() => {
-          this.countDown(2011);
+          this.countDown(code);
         }, 500);
         //
         // wrong code
@@ -145,9 +163,10 @@ export default class TimeMachine extends Component {
   }
 
   //display countdown effect on display
-  countDown(endYear) {
+  countDown(code) {
     let currentYear = new Date().getFullYear();
     let count = 0;
+    let endYear = this.state.travelData[code].year;
 
     //display year effect
     let interval = setInterval(() => {
@@ -166,7 +185,7 @@ export default class TimeMachine extends Component {
       if (count === 20) {
         clearInterval(interval);
         this.setState({ display: endYear });
-        this.timeTravel(endYear);
+        this.timeTravel(code);
       }
 
       count++;
@@ -174,30 +193,39 @@ export default class TimeMachine extends Component {
   }
 
   //travel through time!
-  timeTravel(endYear) {
+  timeTravel(code) {
     let count = 0;
     let timeoutDuration = 0;
+    let travelData = this.state.travelData[code];
 
     //more years can be added here. Need new sound, duration of sound,
     //and interval for display effects.
-    if (endYear === 2011) {
-      //
-      //set time travel sound and duration
-      this.audioTT = new Audio(tmSound2011);
-      timeoutDuration = 27000;
+    // if (this.state.travelData[code].year) {
+    //
+    //set time travel sound and duration
+    this.audioTT = new Audio(travelData.sound);
+    timeoutDuration = travelData.duration;
 
-      //display text effects
-      this.displayInterval = setInterval(() => {
-        if (count === 10) this.setState({ display: 'FRDAY' });
-        if (count === 75) this.setState({ display: 'WKEND' });
-        if (count === 95) this.setState({ display: 'FRDAY' });
-        if (count === 170) this.setState({ display: 'WKEND' });
-        if (count === 180) this.setState({ display: 'PARTY' });
-        if (count === 198) this.setState({ display: 'YEAH!' });
-        if (count === 225) this.setState({ display: 'FUN!!' });
-        count++;
-      }, 100);
-    }
+    //display text effects
+    // this.displayInterval = setInterval(() => {
+    //   if (count === 10) this.setState({ display: 'FRDAY' });
+    //   if (count === 75) this.setState({ display: 'WKEND' });
+    //   if (count === 95) this.setState({ display: 'FRDAY' });
+    //   if (count === 170) this.setState({ display: 'WKEND' });
+    //   if (count === 180) this.setState({ display: 'PARTY' });
+    //   if (count === 198) this.setState({ display: 'YEAH!' });
+    //   if (count === 225) this.setState({ display: 'FUN!!' });
+    //   count++;
+    // }, 100);
+    // }
+
+    let displayInterval = setInterval(() => {
+      if (travelData.countDisplay[count])
+        this.setState({ display: travelData.countDisplay[count] });
+      count++;
+    }, 100);
+
+    this.setState({ displayInterval: displayInterval });
 
     //play time travel sound
     this.audioTT.play();
