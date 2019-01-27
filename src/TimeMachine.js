@@ -11,14 +11,30 @@ export default class TimeMachine extends Component {
     super(props);
     this.state = {
       display: '#####',
-      power: false
+      power: false,
+      displayTimeout: null,
+      displayInterval: null,
+      travelData: {
+        10101: {
+          year: 2011,
+          countDisplay: {
+            10: 'FRDAY',
+            75: 'WKEND',
+            95: 'FRDAY',
+            170: 'WKEND',
+            180: 'PARTY',
+            198: 'YEAH',
+            225: 'FUN'
+          }
+        }
+      }
     };
     this.handleClick = this.handleClick.bind(this);
     this.handlePower = this.handlePower.bind(this);
 
     //timeout and interval ID's
-    this.displayTimeout = null;
-    this.displayInterval = null;
+    // this.displayTimeout = null;
+    // this.displayInterval = null;
 
     //audio
     this.audioClick = new Audio(clickSound);
@@ -83,11 +99,16 @@ export default class TimeMachine extends Component {
       document.body.className = '';
 
       //clear timeout used to control the display during time travel
-      if (this.displayTimeout) {
-        clearTimeout(this.displayTimeout);
-        clearInterval(this.displayInterval);
-        this.displayTimeout = null;
-        this.displayInterval = null;
+      // if (this.displayTimeout) {
+      //   clearTimeout(this.displayTimeout);
+      //   clearInterval(this.displayInterval);
+      //   this.displayTimeout = null;
+      //   this.displayInterval = null;
+      // }
+      if (this.state.displayTimeout) {
+        clearTimeout(this.state.displayTimeout);
+        clearInterval(this.state.displayInterval);
+        this.setState({ displayTimeout: null, displayInterval: null });
       }
 
       //turn on
@@ -185,13 +206,22 @@ export default class TimeMachine extends Component {
     document.body.className = 'flash';
 
     //after sound, reset display and effects
-    this.displayTimeout = setTimeout(() => {
+    // this.displayTimeout = setTimeout(() => {
+    //   document.body.className = '';
+    //   this.setState({ display: '#####' });
+
+    //   //kill timeout for display count
+    //   if (this.displayInterval) clearTimeout(this.displayInterval);
+    // }, timeoutDuration);
+    let displayTimeout = setTimeout(() => {
       document.body.className = '';
       this.setState({ display: '#####' });
 
       //kill timeout for display count
-      if (this.displayInterval) clearTimeout(this.displayInterval);
+      if (this.state.displayInterval) clearTimeout(this.state.displayInterval);
     }, timeoutDuration);
+
+    this.setState({ displayTimeout: displayTimeout });
   }
 
   render() {
