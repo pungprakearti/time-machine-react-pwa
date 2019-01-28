@@ -12,8 +12,12 @@ export default class TimeMachine extends Component {
     this.state = {
       display: '#####',
       power: false,
+
+      //timeout and interval ID's
       displayTimeout: null,
       displayInterval: null,
+
+      //date for all time travel possibilities
       travelData: {
         10101: {
           year: 2011,
@@ -23,20 +27,17 @@ export default class TimeMachine extends Component {
             95: 'FRDAY',
             170: 'WKEND',
             180: 'PARTY',
-            198: 'YEAH',
-            225: 'FUN'
+            198: 'YEAH!',
+            225: 'FUN!!'
           },
           sound: tmSound2011,
           duration: 27000
         }
       }
     };
+
     this.handleClick = this.handleClick.bind(this);
     this.handlePower = this.handlePower.bind(this);
-
-    //timeout and interval ID's
-    // this.displayTimeout = null;
-    // this.displayInterval = null;
 
     //audio
     this.audioClick = new Audio(clickSound);
@@ -101,12 +102,6 @@ export default class TimeMachine extends Component {
       document.body.className = '';
 
       //clear timeout used to control the display during time travel
-      // if (this.displayTimeout) {
-      //   clearTimeout(this.displayTimeout);
-      //   clearInterval(this.displayInterval);
-      //   this.displayTimeout = null;
-      //   this.displayInterval = null;
-      // }
       if (this.state.displayTimeout) {
         clearTimeout(this.state.displayTimeout);
         clearInterval(this.state.displayInterval);
@@ -126,32 +121,17 @@ export default class TimeMachine extends Component {
 
   //check code and if is correct, time travel
   checkCode(code) {
-    setTimeout(() => {
+    let checkCodeTimeout = setTimeout(() => {
       //
-      //other years and codes can be entered here
-      // if (code === '10101') {
-      //   this.setState({ display: 'TRAVL' });
-      //   setTimeout(() => {
-      //     this.countDown(2011);
-      //   }, 500);
-      //   //
-      //   // wrong code
-      // } else {
-      //   this.audioError.play();
-      //   this.setState({ display: 'ERROR' });
-      //   setTimeout(() => {
-      //     this.setState({ display: '#####' });
-      //   }, 750);
-      // }
-
-      // if (code === '10101') {
+      //if travel code exists, start traveling sequence
       if (this.state.travelData[code]) {
         this.setState({ display: 'TRAVL' });
-        setTimeout(() => {
+        let travelTimeout = setTimeout(() => {
           this.countDown(code);
         }, 500);
+        this.setState({ displayTimeout: travelTimeout });
         //
-        // wrong code
+        //else if wrong code error out
       } else {
         this.audioError.play();
         this.setState({ display: 'ERROR' });
@@ -160,6 +140,8 @@ export default class TimeMachine extends Component {
         }, 750);
       }
     }, 500);
+
+    this.setState({ displayTimeout: checkCodeTimeout });
   }
 
   //display countdown effect on display
@@ -198,27 +180,11 @@ export default class TimeMachine extends Component {
     let timeoutDuration = 0;
     let travelData = this.state.travelData[code];
 
-    //more years can be added here. Need new sound, duration of sound,
-    //and interval for display effects.
-    // if (this.state.travelData[code].year) {
-    //
     //set time travel sound and duration
     this.audioTT = new Audio(travelData.sound);
     timeoutDuration = travelData.duration;
 
     //display text effects
-    // this.displayInterval = setInterval(() => {
-    //   if (count === 10) this.setState({ display: 'FRDAY' });
-    //   if (count === 75) this.setState({ display: 'WKEND' });
-    //   if (count === 95) this.setState({ display: 'FRDAY' });
-    //   if (count === 170) this.setState({ display: 'WKEND' });
-    //   if (count === 180) this.setState({ display: 'PARTY' });
-    //   if (count === 198) this.setState({ display: 'YEAH!' });
-    //   if (count === 225) this.setState({ display: 'FUN!!' });
-    //   count++;
-    // }, 100);
-    // }
-
     let displayInterval = setInterval(() => {
       if (travelData.countDisplay[count])
         this.setState({ display: travelData.countDisplay[count] });
@@ -234,13 +200,6 @@ export default class TimeMachine extends Component {
     document.body.className = 'flash';
 
     //after sound, reset display and effects
-    // this.displayTimeout = setTimeout(() => {
-    //   document.body.className = '';
-    //   this.setState({ display: '#####' });
-
-    //   //kill timeout for display count
-    //   if (this.displayInterval) clearTimeout(this.displayInterval);
-    // }, timeoutDuration);
     let displayTimeout = setTimeout(() => {
       document.body.className = '';
       this.setState({ display: '#####' });
